@@ -10,7 +10,6 @@ from PIL import Image, ImageTk
 
 # Variables
 subpage_title_font = ("Helvetica", 30, "bold")
-button_icon_font = ("Helvetica", 30, "bold")
 button_font = ("Helvetica", 20, "bold")
 registration_font = ("Helvetica", 20)
 label_font = ("Helvetica", 16)
@@ -37,6 +36,8 @@ pronoun = ""
 temperature_record_list = []
 medicine_record_list = []
 
+pressed_show_treeview = True
+pressed_medication_tracker = True
 pressed_about_medicine = True
 pressed_famous_diseases = True
 
@@ -207,7 +208,8 @@ def ask_preferred_pronoun():
     pronoun_dropdown.config(font=registration_font, bg=theme_color, width=15)
     pronoun_dropdown.place(x=550, y=280)
 
-    pronoun_entry = tk.Entry(root, font=registration_font)
+    pronoun_entry = tk.Entry(root, font=registration_font, fg="gray")
+    pronoun_entry.insert(tk.END, ("pls specify (if applicable)"))
     pronoun_entry.place(x=550, y=325)
 
     submit_button = tk.Button(root, text="Submit", bg=button_color, font=button_font,
@@ -474,14 +476,38 @@ def create_medicine_page():
     instruction_label = tk.Label(scrollable_frame, text=instruction_text, font=label_font, justify="left", wraplength=800, bg=theme_color)
     instruction_label.grid(column=0, row=1, columnspan=2, sticky=tk.W, pady=10)
 
+    def show_treeview():
+        global pressed_show_treeview
+        if pressed_show_treeview:
+            treeview_frame.grid(column=0, row=3, columnspan=2, sticky=tk.W)
+            pressed_show_treeview = False
+        else:
+            treeview_frame.grid_forget()
+            pressed_show_treeview = True
+
+    show_treeview_button = tk.Button(scrollable_frame, text="Dosage Instructions", font=button_font, bg=theme_color, command=show_treeview)
+    show_treeview_button.grid(column=0, row=2, columnspan=2, sticky=tk.W, pady=10)
+
+    def show_medication_tracker():
+        global pressed_medication_tracker
+        if pressed_medication_tracker:
+            medication_tracker_frame.grid(column=0, row=5, columnspan=2, sticky=tk.W)
+            pressed_medication_tracker = False
+        else:
+            medication_tracker_frame.grid_forget()
+            pressed_medication_tracker = True
+
+    show_medication_tracker_button = tk.Button(scrollable_frame, text="Medication Tracker", font=button_font, bg=theme_color, command=show_medication_tracker)
+    show_medication_tracker_button.grid(column=0, row=4, columnspan=2, sticky=tk.W, pady=10)
+
+
     treeview_frame = tk.Frame(scrollable_frame)
-    treeview_frame.grid(column=0, row=3, columnspan=2, sticky=tk.W)
 
     #To be able to adjust the rowheight of the treeview
     style = ttk.Style()
-    style.configure("Treeview", rowheight=80)
+    style.configure("Treeview", rowheight=50, font=(None, 10))
 
-    treeview = ttk.Treeview(treeview_frame, columns=("#1", "#2", "#3", "#4"))
+    treeview = ttk.Treeview(treeview_frame, columns=("#1", "#2", "#3"))
 
     treeview.column("#0", width=330)
     treeview.heading("#0", text="Medicine Name")
@@ -494,9 +520,6 @@ def create_medicine_page():
 
     treeview.column("#3", width=300)
     treeview.heading("#3", text="Maximum Self-care Intake")
-
-    treeview.column("#4", width=1100)
-    treeview.heading("#4", text="Source")
 
     paracetamol_adult_source = ("https://www.nhs.uk/medicines/paracetamol-for-adults/how-and-when-to-take-paracetamol-for-adults/")
     ibuprofen_adult_source = ("1. https://www.nhs.uk/medicines/ibuprofen-for-adults/how-and-when-to-take-ibuprofen/#:~:text=The%20usual%20dose%20for%20adults,under%20supervision%20of%20a%20doctor.\n"
@@ -539,18 +562,18 @@ def create_medicine_page():
                                   )
     paracetamol_adult = treeview.insert(instruction_adult,tk.END,
                                   text="Paracetamol (Acetaminophen)",
-                                  values=("500mg/tablet, 1~2 tablets", "Every 4~6 hours", "4000mg per 24 hours.", paracetamol_adult_source)
+                                  values=("500mg/tablet, 1~2 tablets", "Every 4~6 hours", "4000mg per 24 hours.")
                                   )
     ibuprofen_adult = treeview.insert(instruction_adult,
                                   tk.END,
                                   text="Ibuprofen",
-                                  values=("200mg/tablet, 1~2 tablets", "Every 4~6 hours", "1200mg per 24 hours.", ibuprofen_adult_source)
+                                  values=("200mg/tablet, 1~2 tablets", "Every 4~6 hours", "1200mg per 24 hours.")
                                   )
 
     aspirin_adult = treeview.insert(instruction_adult,
                                       tk.END,
                                       text="Aspirin",
-                                      values=("300mg/tablet, 1~2 tablets", "Every 4~6 hours", "3000~4000mg per 24 hours", aspirin_adult_source)
+                                      values=("300mg/tablet, 1~2 tablets", "Every 4~6 hours", "3000~4000mg per 24 hours")
                                     )
 
     instruction_teen = treeview.insert("",
@@ -561,19 +584,19 @@ def create_medicine_page():
     paracetamol_teen = treeview.insert(instruction_teen,
                                         tk.END,
                                         text="Paracetamol (Acetaminophen)",
-                                        values=("500mg/tablet, 1~2 tablets", "Every 4~6 hours", "4000mg per 24 hours", paracetamol_teen_source)
+                                        values=("500mg/tablet, 1~2 tablets", "Every 4~6 hours", "4000mg per 24 hours")
                                         )
     ibuprofen_teen = treeview.insert(instruction_teen,
                                       tk.END,
                                       text="Ibuprofen",
-                                      values=("200mg/tablet, 1~2 tablets", "Every 4~6 hours", "1200mg per 24 hours", ibuprofen_teen_source)
+                                      values=("200mg/tablet, 1~2 tablets", "Every 4~6 hours", "1200mg per 24 hours")
                                       )
     aspirin_teen = treeview.insert(instruction_teen,
                                     tk.END,
                                     text="Aspirin",
                                     values=("Should NOT be given to childrens and teenagers\n"
                                             "under 18 as it may cause Reye's syndrome\n"
-                                            "(unless recommended by physicians).", "-", "-",aspirin_teen_source)
+                                            "(unless recommended by physicians).", "-", "-")
                                     )
 
     instruction_child = treeview.insert("",
@@ -585,13 +608,13 @@ def create_medicine_page():
                                         tk.END,
                                         text="Paracetamol (Acetaminophen)",
                                         values=("10~15mg/kg/dose.\n"
-                                                "Please note the units of measurement.", "Every 4~6 hours", "4 times per 24 hours. No longer than 3 days", paracetamol_child_source)
+                                                "Please note the units of measurement.", "Every 4~6 hours", "4 times per 24 hours. No longer than 3 days")
                                         )
     ibuprofen_child = treeview.insert(instruction_child,
                                       tk.END,
                                       text="Ibuprofen",
                                       values=("5~10mg/kg/dose.\n"
-                                              "Please note the units of measurement.", "Every 6~8 hours", "4 times per 24 hours. No longer than 3 days", ibuprofen_child_source)
+                                              "Please note the units of measurement.", "Every 6~8 hours", "4 times per 24 hours. No longer than 3 days")
                                       )
 
     aspirin_child = treeview.insert(instruction_child,
@@ -599,12 +622,30 @@ def create_medicine_page():
                                     text="Aspirin",
                                     values=("Should NOT be given to childrens and teenagers\n"
                                             "under 18 as it may cause Reye's syndrome\n"
-                                            "(unless recommended by physicians).", "-", "-", aspirin_child_source)
+                                            "(unless recommended by physicians).", "-", "-")
                                     )
-    treeview.pack(fill="both", expand=True)
+    treeview.pack(fill="y", expand=True)
+
+    reference_dosage_instruction_text = (f" \n"
+                                         f" \n"
+                                         f" \n"
+                                         f" \n"
+                                         f" \n"
+                                         f"Reference for the medical information used on this page:\n"
+                                         f"Paracetamol for Adults: {paracetamol_adult_source}\n"
+                                         f"Ibuprofen for Adults: {ibuprofen_adult_source}\n"
+                                         f"Aspirin for Adults: {aspirin_adult_source}\n"
+                                         f"Paracetamol for Teenagers: {paracetamol_teen_source}\n"
+                                         f"Ibuprofen for Teenagers: {ibuprofen_teen_source}\n"
+                                         f"Aspirin for Teenagers: {aspirin_teen_source}"
+                                         f"Paracetamol for Children: {paracetamol_child_source}\n"
+                                         f"Ibuprofen for Children: {ibuprofen_child_source}\n"
+                                         f"Aspirin for Children: {aspirin_child_source}")
+
+    reference_dosage_instruction_label = tk.Label(scrollable_frame, text=reference_dosage_instruction_text, font=reference_font, justify="left", wraplength=800, bg=theme_color)
+    reference_dosage_instruction_label.grid(column=0, row=6, columnspan=2, sticky=tk.W, pady=10)
 
     medication_tracker_frame = tk.Frame(scrollable_frame, bg=theme_color)
-    medication_tracker_frame.grid(column=0, row=4, columnspan=2, sticky=tk.W)
 
     medication_tracker_label = tk.Label(medication_tracker_frame, text="\nMedication Tracker", font="Helvetica 25 bold", bg=theme_color)
     medication_tracker_label.grid(column=0, row=4, columnspan=2, sticky=tk.W, pady=10)
@@ -694,8 +735,11 @@ def submit_medicine(medicine):
 
 
 def return_to_homepage_from_med():
+    global pressed_show_treeview, pressed_medication_tracker
     med_frame.grid_forget()
-        # Show home page widgets
+    pressed_show_treeview = True
+    pressed_medication_tracker = True
+    # Show home page widgets
     home_frame.place(x=0, y=0, relwidth=1, relheight=1)
 
 
@@ -855,7 +899,11 @@ def create_knowledge_page():
 
 
 def return_to_homepage_from_know():
+    global pressed_about_medicine, pressed_famous_diseases
     know_frame.grid_forget()
+    pressed_about_medicine = True
+    pressed_famous_diseases = True
+
     home_frame.place(x=0, y=0, relwidth=1, relheight=1)
 
 
@@ -1190,8 +1238,6 @@ rheumatic_fever_image = ImageTk.PhotoImage(rheumatic_fever_image)
 dengue_fever_image = Image.open('dengue_fever.jpg')
 dengue_fever_image = dengue_fever_image.resize((500, 1217)) # original 800*1947
 dengue_fever_image = ImageTk.PhotoImage(dengue_fever_image)
-
-
 
 
 #The very first page (welcome page to with a name entry)
