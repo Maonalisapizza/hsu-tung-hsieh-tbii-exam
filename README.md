@@ -22,10 +22,10 @@ This app (GUI) is not intended to provide any medical advice. Please seek profes
 
 ------------------------------------------------
 ## About the app
-# Introduction
+### Introduction
 This app (GUI) is named "I HAVE A FEVER" and is built using Python with the TK, PIL, and datetime libraries. It aims to assist people when someone has a fever by allowing users to track body temperature and medicine intake. Additionally, it provides quick diagnoses, medical knowledge, and an export function for doctors' reference.
 
-# Main Functional Pages
+### Main Functional Pages
 Users first need to complete the registration process. Afterward, they are directed to the homepage, which features five buttons linked to different pages:
 -	Temperature Page: Tracks and records body temperature.
 -	Medicine Page: Displays dosage instructions in a tree-view table and tracks medication intake.
@@ -33,7 +33,7 @@ Users first need to complete the registration process. Afterward, they are direc
 -	Medical Knowledge Page: Contains infographics about fever and related topics.
 -	Export Function: Allows users to export the patient’s basic information and data from the temperature and medication trackers.
 
-# Design
+### Design
 Video demonstration of the GUI design: https://youtu.be/-t-Q8Wt2KVs (This is what the GUI should look like)
 
 -	Registration Process: The registration involves multiple pages, each with a background image. The app’s main character—an eggplant—appears frequently with variations to entertain users. Labels and entry boxes are positioned next to the eggplant using the "place" method for flexibility.
@@ -44,14 +44,14 @@ Video demonstration of the GUI design: https://youtu.be/-t-Q8Wt2KVs (This is wha
 
 -	General Design Principles: The app adopts a consistent theme color. Most labels, buttons, and frames follow predefined sizes or fonts stored in variables to ensure uniformity and harmony. (You can definitely change the fonts!)
 
-# Challenges and Limitations
+### Challenges and Limitations
 
 - The "treeview" function does not support inserting widgets other than text. To achieve similar results, such as on the medicine knowledge page, I had to build it using buttons and various definitions, which complicates the code.
   
 - Aligning many elements neatly on a page is challenging, often requiring nested frames to maintain a clean layout.
 
 
-# Reference
+## Reference
 
 
 
