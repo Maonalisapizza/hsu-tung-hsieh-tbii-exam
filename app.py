@@ -1010,8 +1010,6 @@ def submit_doctor_smart(temperature, duration, medicine_effect):
     elif duration == "5 days or above":
         duration = 5
 
-    print(temperature, duration, medicine_effect)
-
     doctor_smart_analyze(temperature, duration, medicine_effect)
 
 def doctor_smart_analyze(temperature, duration, medicine_effect):
@@ -1025,9 +1023,8 @@ def doctor_smart_analyze(temperature, duration, medicine_effect):
         elif age_years <= 0 and age_months >= 3 and age_months <= 6:  # Infants 3 to 6 months
             if temperature > 38.9:
                 give_suggestion_emergency()
-            elif temperature <= 38.9 and duration < 3:
-                if medicine_effect == "No, haven't taken any yet":
-                    give_suggestion_try_medication()
+            elif temperature >= 38.3 and temperature <= 38.9 and duration < 3 and medicine_effect == "No, haven't taken any yet":
+                give_suggestion_try_medication()
             else:
                 check_general_conditions(temperature, duration, medicine_effect)
 
@@ -1036,7 +1033,7 @@ def doctor_smart_analyze(temperature, duration, medicine_effect):
                 give_suggestion_emergency()
             elif temperature >= 40:
                 give_suggestion_emergency()
-            elif duration < 3 and medicine_effect == "No, haven't taken any yet":
+            elif temperature >= 38.3 and duration < 3 and medicine_effect == "No, haven't taken any yet":
                 give_suggestion_try_medication()
             else:
                 check_general_conditions(temperature, duration, medicine_effect)
@@ -1046,7 +1043,7 @@ def doctor_smart_analyze(temperature, duration, medicine_effect):
                 give_suggestion_emergency()
             elif temperature >= 40:
                 give_suggestion_emergency()
-            elif duration < 3 and medicine_effect == "No, haven't taken any yet":
+            elif temperature >= 38.3 and duration < 3 and medicine_effect == "No, haven't taken any yet":
                 give_suggestion_try_medication()
             else:
                 check_general_conditions(temperature, duration, medicine_effect)
@@ -1054,7 +1051,7 @@ def doctor_smart_analyze(temperature, duration, medicine_effect):
         elif age_years >= 3 and age_years < 12:  # Children 3 to 12 years
             if temperature >= 40:
                 give_suggestion_emergency()
-            elif duration < 3 and medicine_effect == "No, haven't taken any yet":
+            elif temperature >= 38.3 and duration < 3 and medicine_effect == "No, haven't taken any yet":
                 give_suggestion_try_medication()
             else:
                 check_general_conditions(temperature, duration, medicine_effect)
@@ -1062,7 +1059,7 @@ def doctor_smart_analyze(temperature, duration, medicine_effect):
         elif age_years >= 12:  # Individuals 12 years and older
             if temperature >= 39.4:
                 give_suggestion_emergency()
-            elif duration < 3 and medicine_effect == "No, haven't taken any yet":
+            elif temperature >= 38.3 and duration < 3 and medicine_effect == "No, haven't taken any yet":
                 give_suggestion_try_medication()
             else:
                 check_general_conditions(temperature, duration, medicine_effect)
