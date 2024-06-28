@@ -46,7 +46,7 @@ Video demonstration of the GUI design: https://youtu.be/-t-Q8Wt2KVs (This is wha
 
 ### Challenges and Limitations
 
-- The "treeview" function does not support inserting widgets other than text. To achieve similar results, such as on the medicine knowledge page, I had to build it using buttons and various definitions, which complicates the code.
+- The "treeview" function does not support inserting widgets other than text. To achieve similar results, such as on the medicine knowledge page, I had to build it using buttons and various definitions, which complicated the code.
   
 - Aligning many elements neatly on a page is challenging, often requiring nested frames to maintain a clean layout.
 
