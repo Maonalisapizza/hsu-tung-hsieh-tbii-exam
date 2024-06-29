@@ -3,11 +3,12 @@
 # App (GUI) -- I HAVE A FEVER
 
 ## Instruction: How to Start the App?
-1. Create a folder on your device
-2. Download EVERYTHING in this repository to the folder
-3. Open the folder with your preferred python program (PyCharm is recommended)
-4. Run the python file "app.py"
-5. Enjoy :)
+1. Go to the green button showing "<>code" on the repository page
+2. Press "Download Zip"
+3. Unzip the zip file and you'll get a folder named "hsu-tung-hsieh-tbii-exam-main"
+5. Open the folder with your preferred python program (PyCharm is recommended)
+6. Run the python file "app.py"
+7. Enjoy :)
 
 ## Important Notes
 1.  Please ensure that all the images and the app.py file are in the same folder
