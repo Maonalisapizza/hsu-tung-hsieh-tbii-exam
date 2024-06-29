@@ -11,11 +11,12 @@
 7. Enjoy :)
 
 ## Important Notes
-1.  Please ensure that all the images and the app.py file are in the same folder
-2.  Please do not adjust the frame size (e.g. fullscreen) to maintain the original layouts
-3.  It's normal if the program does not react immediately because it can be taxing for the system. Give it a few seconds and it'll work.
-4.  Some users have problems with the calendar widget. You can try double-clicking it first. If that doesn't work just enter the date manualy
-5.  Please wait for a few seconds if a page is blank. The system might be loading it.
+1.  Please ensure that you've downloaded all the libraries needed
+2.  Please ensure that all the images and the app.py file are in the same folder
+3.  Please do not adjust the frame size (e.g. fullscreen) to maintain the original layouts
+4.  It's normal if the program does not react immediately because it can be taxing for the system. Give it a few seconds and it'll work.
+5.  Some users have problems with the calendar widget. You can try double-clicking it first. If that doesn't work just enter the date manualy
+6.  Please wait for a few seconds if a page is blank. The system might be loading it.
 
 ## Disclaimer
 This app (GUI) is not intended to provide any medical advice. Please seek professonal assistance if necessary.
